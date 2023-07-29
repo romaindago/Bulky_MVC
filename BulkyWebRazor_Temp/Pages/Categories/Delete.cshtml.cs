@@ -26,10 +26,16 @@ namespace BulkyWebRazor_Temp.Pages.Categories
 
         public IActionResult OnPost()
         {
-            _db.Categories.Remove(Category);
+            var obj = _db.Categories.Find(Category.Id);
+
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            _db.Categories.Remove(obj);
             _db.SaveChanges();
             TempData["success"] = "Category deleted successfully";
-            return RedirectToPage("Index");
+            return RedirectToAction("Index");
         }
     }
 }

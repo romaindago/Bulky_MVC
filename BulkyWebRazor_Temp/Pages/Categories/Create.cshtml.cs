@@ -22,10 +22,14 @@ namespace BulkyWebRazor_Temp.Pages.Categories
 
         public IActionResult OnPost()
         {
-            _db.Categories.Add(Category);
-            _db.SaveChanges();
-            TempData["success"] = "Category created successfully";
-            return RedirectToPage("Index");
+            if (ModelState.IsValid)
+            {
+                _db.Categories.Add(Category);
+                _db.SaveChanges();
+                TempData["success"] = "Category created successfully";
+                return RedirectToPage("Index");
+            }
+            return Page();
         }
     }
 }
