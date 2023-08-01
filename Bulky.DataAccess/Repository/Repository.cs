@@ -39,7 +39,7 @@ namespace Bulky.DataAccess.Repository
         public T Get(Expression<Func<T, bool>> filter)
         {
             IQueryable<T> query = dbSet;
-            query.Where(filter);
+            query = query.Where(filter);
             return query.FirstOrDefault();
             // query.FirstOrDefault() == _db.Categories.Where(c => c.Id == id).FirstOrDefault();
         }
@@ -47,7 +47,7 @@ namespace Bulky.DataAccess.Repository
         public IEnumerable<T> GetAll()
         {
             IQueryable<T> query = dbSet;
-            query.ToList();
+            return query.ToList();
         }
     }
 }
